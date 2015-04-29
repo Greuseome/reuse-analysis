@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title>greuseom - status</title>
+    <style>
+        .chart { 
+            width: 400px;
+            height: 250px;
+        }
+        .chartbox {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<h3>GReuseOM - Results</h3>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+CHART_DIVS
+
+<script text="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart', 'line']});
+
+    CHART_CALLS
+
+    function drawCurveTypes(title,chart_id, the_data, n_lines) {
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'generations');
+        for(i=0; i< n_lines; i++ ) {
+            console.log('line #'+i);
+            data.addColumn('number', 'Run #'+ (i+1));
+        }
+        data.addRows(the_data);
+
+        var options = {
+            hAxis: {
+                title: 'Generations'
+            },
+            vAxis: {
+                title: 'Score'
+            },
+            series: {
+                title: title,
+                //0: {curveType: 'function'}
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById(chart_id));
+        chart.draw(data, options);
+    }
+</script>
+
+</body>
+</html>
